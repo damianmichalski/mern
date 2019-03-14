@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import PostListItem from './PostListItem/PostListItem';
 
 function PostList(props) {
+  {
+    console.log("generowanie listy postow")
   return (
     <div className="listView">
       {
@@ -13,11 +15,14 @@ function PostList(props) {
             post={post}
             key={post.cuid}
             onDelete={() => props.handleDeletePost(post.cuid)}
+            onThumbUp={() => props.handleThumbUp(post.cuid, post.voteCount + 1)}
+            onThumbDown={() => props.handleThumbUp(post.cuid, post.voteCount - 1)}
           />
         ))
       }
     </div>
   );
+  }
 }
 
 PostList.propTypes = {
@@ -27,6 +32,7 @@ PostList.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    voteCount: PropTypes.number.isRequired,
   })).isRequired,
   handleDeletePost: PropTypes.func.isRequired,
 };

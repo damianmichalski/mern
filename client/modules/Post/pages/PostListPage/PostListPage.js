@@ -7,7 +7,7 @@ import PostList from '../../components/PostList';
 import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
 
 // Import Actions
-import { addPostRequest, fetchPosts, deletePostRequest } from '../../PostActions';
+import { addPostRequest, fetchPosts, deletePostRequest, updateVotesRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -30,14 +30,21 @@ class PostListPage extends Component {
     this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
+  updateVotesRequest = (cuid, voteCount) => {
+    this.props.dispatch(updateVotesRequest(cuid, { voteCount }));
+  };
+
   render() {
+    {
+      console.log("generowanie strony do wyswietlania postow")
     return (
       <div>
         <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
-        <PostList handleDeletePost={this.handleDeletePost} posts={this.props.posts} />
+        <PostList handleDeletePost={this.handleDeletePost} posts={this.props.posts} handleThumbUp={this.updateVotesRequest} handleThumbDown={this.updateVotesRequest}/>
       </div>
     );
   }
+}
 }
 
 // Actions required to provide data for this component to render in sever side.
