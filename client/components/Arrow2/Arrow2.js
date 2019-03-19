@@ -1,9 +1,7 @@
 import React from "react";
 
-const
-Arrow2 = props => (
-return ();
-);
+const Arrow2 = props => {
+  return {};
+};
 
-export default
-Arrow2;
+export default Arrow2;
